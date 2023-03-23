@@ -3,30 +3,35 @@ package villagegaulois;
 import personnages.Gaulois;
 import produit.Produit;
 
-public class Etal <T extends Produit>{
+public class Etal <T extends Produit> implements IEtal<T>{
     private Gaulois vendeur;
     private T produit;
     private int quantiteDebutMarche;
     private int quantite;
     private boolean etalOccupe = false;
 
-    public boolean isEtalOccupe() {
+    @Override
+	public boolean isEtalOccupe() {
         return etalOccupe;
     }
 
-    public Gaulois getVendeur() {
+    @Override
+	public Gaulois getVendeur() {
         return vendeur;
     }
 
-    public int getQuantite() {
+    @Override
+	public int getQuantite() {
         return quantite;
     }
 
-    public T getProduit() {
+    @Override
+	public T getProduit() {
         return produit;
     }
 
-    public void occuperEtal(Gaulois vendeur, T produit, int quantite) {
+    @Override
+	public void occuperEtal(Gaulois vendeur, T produit, int quantite) {
         this.vendeur = vendeur;
         this.produit = produit;
         this.quantite = quantite;
@@ -34,11 +39,13 @@ public class Etal <T extends Produit>{
         etalOccupe = true;
     }
 
-    public boolean contientProduit(String produit) {
+    @Override
+	public boolean contientProduit(String produit) {
         return this.produit.equals(produit);
     }
 
-    public int acheterProduit(int quantiteAcheter) {
+    @Override
+	public int acheterProduit(int quantiteAcheter) {
         if (quantite == 0) {
             quantiteAcheter = 0;
         }
@@ -51,7 +58,8 @@ public class Etal <T extends Produit>{
         return quantiteAcheter;
     }
 
-    public void libererEtal() {
+    @Override
+	public void libererEtal() {
         etalOccupe = false;
     }
 
@@ -63,7 +71,8 @@ public class Etal <T extends Produit>{
      *         vendu [2] : quantité de produit à vendre au début du marché [4] :
      *         quantité de produit vendu
      */
-    public String[] etatEtal() {
+    @Override
+	public String[] etatEtal() {
         String[] donneesVente = new String[5];
         donneesVente[0] = String.valueOf(etalOccupe);
         if (etalOccupe) {
